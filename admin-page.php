@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Disciple Tools Extension - Admin Page
+ * Plugin Name: Disciple Tools Extension - WhatsApp Quick Response
  * Plugin URI: https://github.com/DiscipleTools/disciple-tools-one-page-extension
  * Description: One page extension of Disciple Tools
  * Version:  0.1.0
@@ -19,15 +19,15 @@
 /**
  * PLEASE, RENAME CLASS AND FUNCTION NAMES BEFORE USING TEMPLATE
  * Rename these three strings:
- *      Admin Page
- *      Admin_Page
- *      admin_page
+ *      WhatsApp Quick Response
+ *      DT_WhatsApp_Response
+ *      dt_whatsapp_response
  */
 
 if ( ! defined( 'ABSPATH' ) ) { exit; } // Exit if accessed directly
 
-if ( ! function_exists( 'admin_page' ) ) {
-    function admin_page() {
+if ( ! function_exists( 'dt_whatsapp_response' ) ) {
+    function dt_whatsapp_response() {
         $required_dt_theme_version = '0.22.0';
         $wp_theme = wp_get_theme();
         $version = $wp_theme->version;
@@ -37,7 +37,7 @@ if ( ! function_exists( 'admin_page' ) ) {
         $is_theme_dt = strpos( $wp_theme->get_template(), "disciple-tools-theme" ) !== false || $wp_theme->name === "Disciple Tools";
         if ( !$is_theme_dt || version_compare( $version, $required_dt_theme_version, "<" ) ) {
             add_action( 'admin_notices', function() {
-                ?><div class="notice notice-error notice-admin_page is-dismissible" data-notice="admin_page">Disciple Tools Theme not active or not latest version for Admin Page plugin.</div><?php
+                ?><div class="notice notice-error notice-dt_whatsapp_response is-dismissible" data-notice="dt_whatsapp_response">Disciple Tools Theme not active or not latest version for WhatsApp Quick Response plugin.</div><?php
             } );
             return new WP_Error( 'current_theme_not_dt', 'Disciple Tools Theme not active or not latest version.' );
         }
@@ -52,21 +52,21 @@ if ( ! function_exists( 'admin_page' ) ) {
          */
         $is_rest = dt_is_rest();
         if ( !$is_rest || strpos( dt_get_url_path(), 'sample' ) != false ){
-            return Admin_Page::instance();
+            return DT_WhatsApp_Response::instance();
         }
         return false;
     }
 }
-add_action( 'after_setup_theme', 'admin_page' );
+add_action( 'after_setup_theme', 'dt_whatsapp_response' );
 
 
 /**
- * Class Admin_Page
+ * Class DT_WhatsApp_Response
  */
-class Admin_Page {
+class DT_WhatsApp_Response {
 
-    public $token = 'admin_page';
-    public $title = 'Admin Page';
+    public $token = 'dt_whatsapp_response';
+    public $title = 'WhatsApp Response';
     public $permissions = 'manage_dt';
 
     /**  Singleton */
@@ -260,5 +260,5 @@ class Admin_Page {
 }
 
 // Register activation hook.
-register_activation_hook( __FILE__, [ 'Admin_Page', 'activation' ] );
-register_deactivation_hook( __FILE__, [ 'Admin_Page', 'deactivation' ] );
+register_activation_hook( __FILE__, [ 'DT_WhatsApp_Response', 'activation' ] );
+register_deactivation_hook( __FILE__, [ 'DT_WhatsApp_Response', 'deactivation' ] );

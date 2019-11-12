@@ -1,4 +1,4 @@
-# Disciple Tools - One Page Extension Template
-This project is similar to the full plugin starter template, but it is intended for small modifications that don't require languages, rest, and other features of the full starter plugin.
+# Disciple Tools - WhatsApp Quick Response
+This extension adds a tile to contacts that prepares quick responses to new contacts. 
 
 
